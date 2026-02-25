@@ -11,7 +11,7 @@
     ../home/system/niri/system.nix
     # ../home/system/mango/system.nix
     ../nixos/printing.nix
-    # ../nixos/docker.nix
+    ../nixos/docker.nix
     # ../home/programs/flatpak/system.nix
   ];
   stylix.targets.plymouth.enable = true;
