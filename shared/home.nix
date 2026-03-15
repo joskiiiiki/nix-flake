@@ -10,6 +10,7 @@
     ../home/system/dms
     ../home/programs/obsidian
     ../home/programs/affinity
+    ../home/system/vicinae
     # ../home/programs/sherlock
     ../home/programs/direnv
     ../home/programs/btop
@@ -18,18 +19,16 @@
     ../home/system/niri
     # ../home/system/mango
     ../home/system/gtk
-    ../home/system/wofi
+    # ../home/system/wofi
     ../home/system/batsignal
     ../home/system/zathura
     ../home/system/mime
     ../home/system/udiskie
     ../home/system/clipman
-    ../home/system/tofi
-    ../home/system/vicinae
+    # ../home/system/tofi
     ../home/scripts
     ../home/programs/kitty
-    ../home/programs/ollama
-    ../home/programs/ollama
+    # ../home/programs/ollama
     ../home/programs/shell
     # ../home/programs/fetch
     ../home/programs/git
@@ -54,25 +53,20 @@
     vlc # Video player
     blanket # White-noise app
     pomodoro-gtk
-    clock-rs
     vicinae
 
     proton-pass
-    protonmail-desktop
 
     zen-browser
     obsidian
     vscode
-
-    # gnome
-    bustle
 
     # office
     libreoffice-fresh
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us-large
-    zotero-beta
+    zotero
     onlyoffice-desktopeditors
     # Dev
     python3
@@ -81,8 +75,7 @@
     just
 
     # Utils
-    zip
-    unzip
+    _7zz
     optipng
     pfetch
     pandoc
@@ -103,8 +96,9 @@
     # Backup
     firefox
 
-    biome
-    jupyter-all
+
+    appimage-run
+    ffmpeg
 
     # palettify
   ];

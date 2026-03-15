@@ -56,8 +56,6 @@
           }
         } # This brace closes $env.config
 
-        def trash
-
         alias rm-unsafe = rm;
         alias rm-notrash = rm -i;
         alias rm = rm -i -t
@@ -76,6 +74,8 @@
 
 
     shellAliases = {
+      x = "hx";
+      h = "hx";
       dmenu = "vicinae dmenu";
       c = "clear";
       clera = "clear";
