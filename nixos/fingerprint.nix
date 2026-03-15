@@ -1,8 +1,8 @@
 {
   services.fprintd.enable = true;
   security.pam.services = {
-    greetd.fprintLocation = true;
-    sudo.fprintLocation = true;
-    polkit-1.fprintLocation = true;
+    greetd.fprintAuth = true;
+    sudo.fprintAuth = true;
+    polkit-1.fprintAuth = true;
   };
 }

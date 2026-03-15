@@ -99,8 +99,9 @@
 
     appimage-run
     ffmpeg
+    biome
 
-    # palettify
+    palettify
   ];
 
   home = {

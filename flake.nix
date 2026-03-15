@@ -36,7 +36,10 @@
     affinity = {
       url = "github:mrshmllow/affinity-nix";
     };
-
+    palettify = {
+      url = "github:joskiiiiki/palettify-rust";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,10 +52,11 @@
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${system}.beta;
           affinity = inputs.affinity.packages.${system}.v3;
+          palettify = inputs.palettify.packages.${system}.default;
         })
       ];
       modules = with inputs; [
-        # enable Home Manager               
+        # enable Home Manager
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
         niri.nixosModules.niri
