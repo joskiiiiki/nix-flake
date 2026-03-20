@@ -111,6 +111,8 @@ in
       backdrop-color = background;
     };
 
+    
+
     window-rules = [
       {
         geometry-corner-radius =
@@ -141,13 +143,6 @@ in
     ];
   };
   # services.mako.enable = true;
-  services.mako.settings = {
-    border-radius = rounding;
-    inherit border-size;
-    icon-border-radius = border-size * 3 / 4;
-    padding = "6";
-    group-by = "app-name";
-    layer = "overlay";
-    default-timeout = 3000;
-  };
+
+  
 }

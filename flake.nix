@@ -14,7 +14,7 @@
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.niri-unstable.url = "git+https://github.com/visualglitch91/niri?ref=feat/blur";
+      inputs.niri-unstable.url = "github:niri-wm/niri/wip%2Fbranch";
     };
     # sops-nix = {
     #   url = "github:Mic92/sops-nix";
