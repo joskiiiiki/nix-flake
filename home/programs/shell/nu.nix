@@ -74,6 +74,8 @@
 
 
     shellAliases = {
+      x = "hx";
+      h = "hx";
       dmenu = "vicinae dmenu";
       c = "clear";
       clera = "clear";

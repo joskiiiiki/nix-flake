@@ -26,45 +26,13 @@ let
 
         ${pkgs.wl-mirror}/bin/wl-mirror --fullscreen-output $target $focused
       '';
-  clock =
-    pkgs.writeScriptBin "clock" # nu
-      ''
-        #!/usr/bin/env nu
-        kitten panel --output-name listjson | from json | each { |d| kitten panel -1 --instance-group 1 --layer background -o background_opacity=0 --detach --output-name $d.name clock-rs -i 1000 -s }
-      '';
-  utsiktt = pkgs.writeShellScriptBin "utsiktt" ''
-
-    fd . $1  -a | \
-    fzf \
-    --preview-border=none \
-    --no-separator \
-    --border=none \
-    --keep-right \
-    --list-border=none \
-    --highlight-line \
-    --preview-window=right:30% \
-    --padding=1 \
-    --margin=1 \
-    --no-scrollbar \
-    --no-input \--preview=' \
-      kitty icat \
-      --clear \
-      --transfer-mode=memory \
-      --stdin=no \
-      --scale-up \
-      --place=''${FZF_PREVIEW_COLUMNS}x''${FZF_PREVIEW_LINES}@0x0 {} && \
-      swww img {}'
-  '';
-  utsikt = pkgs.writeScriptBin "utsikt" ''
-    kitty -o background_opacity=0 ${utsiktt}/bin/utsiktt $HOME/Pictures/wallpapers
-  '';
   menu = pkgs.writeScriptBin "menu" ''
     #!/usr/bin/env nu
-    # if (pidof dms | is-not-empty ) {
-    #   dms ipc call spotlight open
-    # } else {
+    if (pidof dms | is-not-empty ) {
+      dms ipc call spotlight open
+    } else {
       vicinae open
-    # }        
+    }        
   '';
 
   powermenu = pkgs.writeScriptBin "powermenu" /* nu */ ''
@@ -121,9 +89,6 @@ in
     menu
     powermenu
     quickmenu
-    utsikt
-    utsiktt
-    clock
     mirror
     powermode
   ];

@@ -3,6 +3,7 @@
   # For 24.11
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd
+    mesa.opencl
   ];
   hardware.graphics = {
     enable = true;

@@ -16,5 +16,6 @@
     basedpyright
     svelte-language-server
     zls
+    biome
   ];
 }
