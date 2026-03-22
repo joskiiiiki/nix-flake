@@ -102,6 +102,10 @@
     biome
 
     palettify
+
+    claude-code
+    todoist-electron
+
   ];
 
   home = {
