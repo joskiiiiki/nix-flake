@@ -104,6 +104,7 @@
     firefox
 
     biome
+    claude-code
     # jupyter-all
 
     # palettify
