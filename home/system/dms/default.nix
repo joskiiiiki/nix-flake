@@ -621,7 +621,7 @@ in
   xdg.configFile."dms/system.json".text =
     let
       stylix = config.lib.stylix.colors;
-      primary = stylix.base0D;
+      primary = stylix.base0B;
       background = stylix.base00;
       surface = stylix.base01;
       foreground = stylix.base07;
