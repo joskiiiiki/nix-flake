@@ -96,7 +96,6 @@
     # Backup
     firefox
 
-
     appimage-run
     ffmpeg
     biome
