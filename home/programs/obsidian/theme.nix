@@ -2,6 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with config.lib.stylix.colors.withHashtag;
+let
+accent = green;
+accent-secondary = cyan;
+in
 
 {
   home.file.obsidian-stylix-css = {
@@ -11,6 +15,8 @@ with config.lib.stylix.colors.withHashtag;
     text = /* css */ "
 
         :root {
+           --accent: ${accent};
+           --accent-secondary: ${accent-secondary};
            --color-red: ${red};
            --color-orange: ${orange};
            --color-yellow: ${yellow};
@@ -20,8 +26,8 @@ with config.lib.stylix.colors.withHashtag;
            --color-purple: ${magenta};
            --color-pink: ${magenta};
 
-           --bold-color: ${red};
-           --italic-color: ${magenta};
+           --bold-color: ${accent};
+           --italic-color: ${accent-secondary};
            --text-normal: ${base05};
            --text-muted: ${base04};
            --text-selection: ${blue};
@@ -117,14 +123,14 @@ with config.lib.stylix.colors.withHashtag;
           --text-accent-hover: ${cyan}; /*Links hover*/
           --text-faint: ${base04}; /*Link brackets color & Gutter Numbers*/
 
-          --text-highlight-bg: ${base0E}66; /*Search Matches*/
-          --text-highlight-bg-active: ${base0A}66; /*Active Search Match (Preview Mode)*/
+          --text-highlight-bg: ${accent}66; /*Search Matches*/
+          --text-highlight-bg-active: ${accent-secondary}66; /*Active Search Match (Preview Mode)*/
           --text-selection: ${base0D}44; /*Text Selections*/
 
           --interactive-normal: ${base01}; /*Button Color*/
           --interactive-hover: ${base00}; /*Button Hovered Color*/
-          --interactive-accent: ${magenta}; /*Workspace Note Title Underline*/
-          --interactive-accent-hover: ${green}; /*Menu Button Hover*/
+          --interactive-accent: ${accent}; /*Workspace Note Title Underline*/
+          --interactive-accent-hover: ${accent-secondary}; /*Menu Button Hover*/
           
           --scrollbar-bg: ${base00}0D; /*Scrollbar Gutter Background*/
           --scrollbar-thumb-bg: ${base05}0D; /*Scrollbar Color*/

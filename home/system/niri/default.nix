@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0D}";
+  accent = "#${config.lib.stylix.colors.base0B}";
   background = "#${config.lib.stylix.colors.base00}";
   border = "#${config.lib.stylix.colors.base04}";
   border-size = config.var.theme.border-size;
