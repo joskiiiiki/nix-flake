@@ -33,9 +33,6 @@
       url = "github:vicinaehq/vicinae";
     };
 
-    affinity = {
-      url = "github:mrshmllow/affinity-nix";
-    };
     palettify = {
       url = "github:joskiiiiki/palettify-rust";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +48,6 @@
         inputs.niri.overlays.niri
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${system}.beta;
-          affinity = inputs.affinity.packages.${system}.v3;
           palettify = inputs.palettify.packages.${system}.default;
         })
       ];

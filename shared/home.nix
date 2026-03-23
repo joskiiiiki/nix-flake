@@ -9,7 +9,6 @@
     # ../secrets
     ../home/system/dms
     ../home/programs/obsidian
-    ../home/programs/affinity
     ../home/system/vicinae
     # ../home/programs/sherlock
     ../home/programs/direnv
