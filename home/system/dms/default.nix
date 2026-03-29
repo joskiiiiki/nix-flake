@@ -115,7 +115,7 @@ in
           type = "regex";
         }
       ];
-      appLauncherGridColumns = 4;
+      appLauncherGridColumns = 5; # was 4
       appLauncherViewMode = "list";
       appPickerViewMode = "grid";
       appsDockActiveColorMode = "primary";
@@ -127,15 +127,15 @@ in
       audioInputDevicePins = { };
       audioOutputDevicePins = { };
       audioScrollMode = "volume";
-      audioVisualizerEnabled = true;
+      audioVisualizerEnabled = false; # was true
       audioWheelScrollAmount = 5;
       barConfigs = [
         {
           autoHide = false;
           autoHideDelay = 250;
           borderColor = "surfaceText";
-          borderEnabled = false;
-          borderOpacity = 1;
+          borderEnabled = true; # was false
+          borderOpacity = 0.2; # was 1
           borderThickness = 1;
           bottomGap = 0;
           centerWidgets = [
@@ -143,23 +143,28 @@ in
             "clock"
             "weather"
           ];
+          clickThrough = false;
           enabled = true;
           fontScale = 1;
           gothCornerRadiusOverride = true;
           gothCornerRadiusValue = 20;
           gothCornersEnabled = true;
+          iconScale = 1;
           id = "default";
           innerPadding = 4;
           leftWidgets = [
             "workspaceSwitcher"
             "focusedWindow"
           ];
+          maximizeWidgetIcons = false;
+          maximizeWidgetText = false;
           name = "Main Bar";
           noBackground = false;
-          openOnOverview = false;
+          openOnOverview = true; # was false
           popupGapsAuto = true;
           popupGapsManual = 4;
-          position = 1;
+          position = 2; # was 1 (bottom->top)
+          removeWidgetPadding = false;
           rightWidgets = [
             "systemTray"
             "clipboard"
@@ -180,8 +185,12 @@ in
           squareCorners = true;
           transparency = 1;
           visible = true;
-          widgetOutlineEnabled = false;
-          widgetTransparency = 1;
+          widgetOutlineColor = "surfaceText";
+          widgetOutlineEnabled = true; # was false
+          widgetOutlineOpacity = 0.1;
+          widgetOutlineThickness = 1;
+          widgetPadding = 10;
+          widgetTransparency = 0.52; # was 1
         }
       ];
       barMaxVisibleApps = 0;
@@ -202,9 +211,10 @@ in
       builtInPluginSettings = { };
       buttonColorMode = "primary";
       centeringMode = "index";
+      clipboardEnterToPaste = false; # new
       clockCompactMode = false;
       clockDateFormat = "";
-      configVersion = 5;
+      configVersion = 6; # was 5
       controlCenterShowAudioIcon = true;
       controlCenterShowAudioPercent = false;
       controlCenterShowBatteryIcon = false;
@@ -287,11 +297,12 @@ in
       customPowerActionReboot = "";
       customPowerActionSuspend = "";
       customThemeFile = lib.mkForce "/home/johannes/.config/dms/system.json";
-      dankLauncherV2BorderColor = "primary";
+      dankLauncherV2BorderColor = "surfaceText"; # was "primary"
       dankLauncherV2BorderEnabled = false;
-      dankLauncherV2BorderThickness = 2;
+      dankLauncherV2BorderThickness = 1; # was 2
       dankLauncherV2ShowFooter = true;
       dankLauncherV2Size = "compact";
+      dankLauncherV2UnloadOnClose = false; # new
       desktopClockColorMode = "primary";
       desktopClockCustomColor = {
         a = 1;
@@ -330,29 +341,29 @@ in
       displaySnapToEdge = true;
       dockAutoHide = false;
       dockBorderColor = "surfaceText";
-      dockBorderEnabled = false;
-      dockBorderOpacity = 1;
+      dockBorderEnabled = true; # was false
+      dockBorderOpacity = 0.15; # was 1
       dockBorderThickness = 1;
       dockBottomGap = 0;
       dockGroupByApp = false;
       dockIconSize = 40;
-      dockIndicatorStyle = "circle";
+      dockIndicatorStyle = "line"; # was "circle"
       dockIsolateDisplays = false;
-      dockLauncherEnabled = false;
+      dockLauncherEnabled = true; # was false
       dockLauncherLogoBrightness = 0.5;
       dockLauncherLogoColorOverride = "";
       dockLauncherLogoContrast = 1;
       dockLauncherLogoCustomPath = "";
-      dockLauncherLogoMode = "apps";
+      dockLauncherLogoMode = "compositor"; # was "apps"
       dockLauncherLogoSizeOffset = 0;
-      dockMargin = 0;
+      dockMargin = 5; # was 0
       dockMaxVisibleApps = 0;
       dockMaxVisibleRunningApps = 0;
-      dockOpenOnOverview = false;
-      dockPosition = 1;
+      dockOpenOnOverview = true; # was false
+      dockPosition = 3; # was 1
       dockShowOverflowBadge = true;
-      dockSmartAutoHide = false;
-      dockSpacing = 4;
+      dockSmartAutoHide = true; # was false
+      dockSpacing = 10; # was 4
       dockTransparency = lib.mkForce 1;
       dwlShowAllTags = false;
       enableFprint = true;
@@ -468,7 +479,7 @@ in
       osdMediaPlaybackEnabled = true;
       osdMediaVolumeEnabled = true;
       osdMicMuteEnabled = true;
-      osdPosition = 5;
+      osdPosition = 0; # was 5
       osdPowerProfileEnabled = false;
       osdVolumeEnabled = true;
       padHours12Hour = false;
@@ -587,9 +598,9 @@ in
       useFahrenheit = false;
       useSystemSoundTheme = false;
       wallpaperFillMode = "Fill";
-      waveProgressEnabled = true;
+      waveProgressEnabled = false; # was true
       weatherEnabled = true;
-      widgetBackgroundColor = "sch";
+      widgetBackgroundColor = "sth"; # was "sch"
       widgetColorMode = "default";
       wifiNetworkPins = { };
       windSpeedUnit = "kmh";
@@ -608,20 +619,19 @@ in
     };
 
     # Core features
-    systemd.enable = false; # Systemd service for auto-start
-    enableSystemMonitoring = true; # System monitoring widgets (dgop)
-    enableVPN = false; # VPN management widget
-    enableDynamicTheming = false; # Wallpaper-based theming (matugen)
-    enableAudioWavelength = false; # Audio visualizer (cava)
-    enableCalendarEvents = true; # Calendar integration (khal)
-    # enableSystemSound = true; # System sound effects
+    systemd.enable = false;
+    enableSystemMonitoring = true;
+    enableVPN = false;
+    enableDynamicTheming = false;
+    enableAudioWavelength = false;
+    enableCalendarEvents = true;
 
   };
 
   xdg.configFile."dms/system.json".text =
     let
       stylix = config.lib.stylix.colors;
-      primary = stylix.base0B;
+      primary = stylix.base0E;
       background = stylix.base00;
       surface = stylix.base01;
       foreground = stylix.base07;
@@ -629,7 +639,7 @@ in
       colors = builtins.mapAttrs (k: v: "#${v}") {
         inherit primary background surface;
         primaryText = background;
-        primaryContainer = mixHex 0.8 background primary;
+        primaryContainer = "#${lib.colors.mixHex 0.8 background primary}";
         backgroundText = foreground;
         surfaceContainer = stylix.base00;
         surfaceContainerHigh = stylix.base01;

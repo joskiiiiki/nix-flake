@@ -47,12 +47,14 @@
     let
       system = "x86_64-linux";
       utils = import ./utils.nix { inherit nixpkgs inputs; };
+      lib = nixpkgs.lib.extend (_: _: import ./lib/colors.nix { lib = nixpkgs.lib; });
       overlays = [
         inputs.niri.overlays.niri
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${system}.beta;
           affinity = inputs.affinity.packages.${system}.v3;
           palettify = inputs.palettify.packages.${system}.default;
+
         })
       ];
       modules = with inputs; [

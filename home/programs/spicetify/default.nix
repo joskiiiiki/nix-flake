@@ -3,6 +3,7 @@
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   colors = config.lib.stylix.colors;
+  accent = colors.base0B;
 
 in
 {
@@ -26,7 +27,7 @@ in
         main = background;
         sidebar = "${colors.base00}";
         card = "${colors.base01}";
-        button = "${colors.base0D}";
+        button = "${accent}";
         button-active = button;
         button-disabled = "${colors.base03}";
       };

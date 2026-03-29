@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0B}";
+  accent = "#${config.lib.stylix.colors.base0E}";
   background = "#${config.lib.stylix.colors.base00}";
   border = "#${config.lib.stylix.colors.base04}";
   border-size = config.var.theme.border-size;
@@ -33,6 +33,7 @@ in
     environment = {
 
       "TERM" = "kitty";
+      "TERMINAL" = "kitty";
       "XDG_CURRENT_DESKTOP" = "Niri";
       "MOZ_ENABLE_WAYLAND" = "1";
       "ANKI_WAYLAND" = "1";
