@@ -9,6 +9,7 @@
   imports = [
     # ../home/system/gnome/system.nix
     ../home/system/niri/system.nix
+    ../home/programs/julia
     # ../home/system/mango/system.nix
     ../nixos/printing.nix
     ../nixos/docker.nix

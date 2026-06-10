@@ -13,7 +13,6 @@
           ];
         };
       }
-
       {
         name = "wgsl";
         language-servers = [ "wgsl-analyzer" ];
@@ -22,7 +21,6 @@
           args = [ "-" ];
         };
       }
-
       {
         name = "python";
         language-servers = [
@@ -33,6 +31,98 @@
           command = "ruff";
           args = [
             "format"
+            "-"
+          ];
+        };
+      }
+      {
+        name = "typescript";
+        language-servers = [
+          "typescript-language-server"
+          "biome"
+          "tailwindcss"
+        ];
+        auto-format = true;
+        formatter = {
+          command = "biome";
+          args = [
+            "format"
+            "--stdin-file-path"
+            "file.ts"
+          ];
+        };
+      }
+      {
+        name = "tsx";
+        language-servers = [
+          "typescript-language-server"
+          "biome"
+          "tailwindcss"
+        ];
+        auto-format = true;
+        formatter = {
+          command = "biome";
+          args = [
+            "format"
+            "--stdin-file-path"
+            "file.tsx"
+          ];
+        };
+      }
+      {
+        name = "javascript";
+        language-servers = [
+          "typescript-language-server"
+          "biome"
+          "tailwindcss"
+        ];
+        auto-format = true;
+        formatter = {
+          command = "biome";
+          args = [
+            "format"
+            "--stdin-file-path"
+            "file.js"
+          ];
+        };
+      }
+      {
+        name = "html";
+        language-servers = [
+          "vscode-html-language-server"
+          "tailwindcss"
+        ];
+        auto-format = true;
+      }
+      {
+        name = "css";
+        language-servers = [
+          "vscode-css-language-server"
+          "tailwindcss"
+        ];
+        auto-format = true;
+      }
+      {
+        name = "json";
+        language-servers = [ "biome" ];
+        auto-format = true;
+        formatter = {
+          command = "biome";
+          args = [
+            "format"
+            "--stdin-file-path"
+            "file.json"
+          ];
+        };
+      }
+      {
+        name = "caddyfile";
+        language-servers = [ "caddy-lsp" ];
+        auto-format = true;
+        formatter = {
+          command = "caddy";
+          args = [
+            "fmt"
             "-"
           ];
         };
@@ -54,6 +144,18 @@
       ty = {
         command = "ty";
         args = [ "server" ];
+      };
+      biome = {
+        command = "biome";
+        args = [ "lsp-proxy" ];
+      };
+      tailwindcss = {
+        command = "tailwindcss-language-server";
+        args = [ "--stdio" ];
+      };
+      caddy-lsp = {
+        command = "caddy-language-server";
+        args = [ "--stdio" ];
       };
     };
   };

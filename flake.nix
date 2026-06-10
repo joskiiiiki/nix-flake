@@ -1,6 +1,5 @@
 {
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
@@ -14,25 +13,24 @@
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.niri-unstable.url = "github:niri-wm/niri/wip%2Fbranch";
     };
-    # sops-nix = {
-    #   url = "github:Mic92/sops-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vercel-nvim = {
+      url = "github:tiesen243/vercel.nvim";
+      flake = false;
+    };
     stylix.url = "github:danth/stylix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     vicinae = {
       url = "github:vicinaehq/vicinae";
     };
-
     affinity = {
       url = "github:mrshmllow/affinity-nix";
     };
@@ -52,25 +50,21 @@
         inputs.niri.overlays.niri
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${system}.beta;
-          affinity = inputs.affinity.packages.${system}.v3;
+          affinity = inputs.affinity.packages.${system}.affinity-v3;
           palettify = inputs.palettify.packages.${system}.default;
-
         })
       ];
       modules = with inputs; [
-        # enable Home Manager
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
         niri.nixosModules.niri
       ];
-
     in
     {
       nixosConfigurations = {
         nixos = utils.mkDesktopSystem {
           inherit system overlays;
           modules = modules ++ [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14 ];
-
           config = ./hosts/nixos/configuration.nix;
         };
         nixpc = utils.mkDesktopSystem {
@@ -78,6 +72,5 @@
           config = ./hosts/nixpc/configuration.nix;
         };
       };
-
     };
 }

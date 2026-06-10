@@ -6,6 +6,7 @@ in
 {
 
   networking.hostName = hostname;
+  networking.firewall.allowedTCPPorts = [ 3000 ];
 
   services = {
     xserver = {

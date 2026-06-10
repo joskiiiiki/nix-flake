@@ -5,65 +5,11 @@
   ...
 }:
 let
-  hexToRgb = hex: {
-    r = lib.fromHexString (builtins.substring 0 2 hex);
-    g = lib.fromHexString (builtins.substring 2 2 hex);
-    b = lib.fromHexString (builtins.substring 4 2 hex);
-  };
-  darkenRgb =
-    f:
-    {
-      r,
-      g,
-      b,
-    }:
-    {
-      r = builtins.floor (r * f);
-      b = builtins.floor (b * f);
-      g = builtins.floor (g * f);
-    };
-  mixRgb =
-    f: c1: c2:
-    let
-      mixComponent =
-        f: a: b:
-        builtins.floor ((1 - f) * a + (f * b));
-    in
-    {
-      r = mixComponent f c1.r c2.r;
-      b = mixComponent f c1.b c2.b;
-      g = mixComponent f c1.g c2.g;
-    };
+  blur = config.var.theme.blur;
 
-  pad =
-    l: s:
-    let
-      padLen = lib.max 0 (l - (lib.stringLength s));
-      padStr = lib.concatStrings (lib.replicate padLen "0");
-    in
-    padStr + s;
-
-  rgbToHex =
-    hex:
-    let
-      s = lib.mapAttrs (k: v: pad 2 (lib.toLower (lib.toHexString v))) hex;
-    in
-    "${s.r}${s.g}${s.b}";
-  darkenHex =
-    hex: f:
-    lib.pipe hex [
-      hexToRgb
-      (darkenRgb f)
-      rgbToHex
-    ];
-  mixHex =
-    f: hex1: hex2:
-    let
-      c1 = hexToRgb hex1;
-      c2 = hexToRgb hex2;
-      res = mixRgb f c1 c2;
-    in
-    rgbToHex res;
+  transparency = if blur then config.var.theme.system-opacity else 1.0;
+  border-size = config.var.theme.border-size;
+  rounding = config.var.theme.rounding;
 
 in
 {
@@ -80,13 +26,16 @@ in
 
     settings = {
 
+      animationSpeed = 0;
+      popoutAnimationSpeed = 0;
+      modalAnimationSpeed = 0;
+
       acLockTimeout = 0;
       acMonitorTimeout = 0;
       acProfileName = "";
       acSuspendBehavior = 0;
       acSuspendTimeout = 0;
       activeDisplayProfile = { };
-      animationSpeed = 1;
       appDrawerSectionViewModes = { };
       appIdSubstitutions = [
         {
@@ -136,7 +85,7 @@ in
           borderColor = "surfaceText";
           borderEnabled = true; # was false
           borderOpacity = 0.2; # was 1
-          borderThickness = 1;
+          borderThickness = border-size;
           bottomGap = 0;
           centerWidgets = [
             "music"
@@ -147,7 +96,7 @@ in
           enabled = true;
           fontScale = 1;
           gothCornerRadiusOverride = true;
-          gothCornerRadiusValue = 20;
+          gothCornerRadiusValue = rounding + config.var.theme.gaps-in * 2;
           gothCornersEnabled = true;
           iconScale = 1;
           id = "default";
@@ -155,6 +104,10 @@ in
           leftWidgets = [
             "workspaceSwitcher"
             "focusedWindow"
+            {
+              id = "dankPomodoroTimer";
+              enabled = true;
+            }
           ];
           maximizeWidgetIcons = false;
           maximizeWidgetText = false;
@@ -183,14 +136,15 @@ in
           showOnLastDisplay = true;
           spacing = 0;
           squareCorners = true;
-          transparency = 1;
           visible = true;
           widgetOutlineColor = "surfaceText";
           widgetOutlineEnabled = true; # was false
           widgetOutlineOpacity = 0.1;
-          widgetOutlineThickness = 1;
+          widgetOutlineThickness = border-size;
           widgetPadding = 10;
           widgetTransparency = 0.52; # was 1
+
+          transparency = transparency;
         }
       ];
       barMaxVisibleApps = 0;
@@ -270,7 +224,7 @@ in
           width = 50;
         }
       ];
-      cornerRadius = 12;
+      cornerRadius = rounding;
       currentThemeCategory = "custom";
       currentThemeName = "custom";
       cursorSettings = {
@@ -299,7 +253,7 @@ in
       customThemeFile = lib.mkForce "/home/johannes/.config/dms/system.json";
       dankLauncherV2BorderColor = "surfaceText"; # was "primary"
       dankLauncherV2BorderEnabled = false;
-      dankLauncherV2BorderThickness = 1; # was 2
+      dankLauncherV2BorderThickness = border-size; # was 2
       dankLauncherV2ShowFooter = true;
       dankLauncherV2Size = "compact";
       dankLauncherV2UnloadOnClose = false; # new
@@ -343,7 +297,7 @@ in
       dockBorderColor = "surfaceText";
       dockBorderEnabled = true; # was false
       dockBorderOpacity = 0.15; # was 1
-      dockBorderThickness = 1;
+      dockBorderThickness = border-size;
       dockBottomGap = 0;
       dockGroupByApp = false;
       dockIconSize = 40;
@@ -364,7 +318,7 @@ in
       dockShowOverflowBadge = true;
       dockSmartAutoHide = true; # was false
       dockSpacing = 10; # was 4
-      dockTransparency = lib.mkForce 1;
+      dockTransparency = lib.mkForce transparency;
       dwlShowAllTags = false;
       enableFprint = true;
       enableRippleEffects = true;
@@ -441,7 +395,6 @@ in
       maxFprintTries = 15;
       maxWorkspaceIcons = 3;
       mediaSize = 1;
-      modalAnimationSpeed = 1;
       modalCustomAnimationDuration = 150;
       modalDarkenBackground = true;
       monoFontFamily = "JetBrains Mono Nerd Font";
@@ -483,9 +436,8 @@ in
       osdPowerProfileEnabled = false;
       osdVolumeEnabled = true;
       padHours12Hour = false;
-      popoutAnimationSpeed = 1;
       popoutCustomAnimationDuration = 150;
-      popupTransparency = 1;
+      popupTransparency = transparency;
       powerActionConfirm = true;
       powerActionHoldDuration = 0.5;
       powerMenuActions = [
@@ -565,6 +517,14 @@ in
       systemMonitorDisplayPreferences = [
         "all"
       ];
+
+      blurEnabled = blur;
+      blurForegroundLayers = true;
+      blurLayerOutlineOpacity = 0.12;
+      blurBorderColor = "outline";
+      blurBorderCustomColor = "#ffffff";
+      blurBorderOpacity = 0.5;
+
       systemMonitorEnabled = false;
       systemMonitorGpuPciId = "";
       systemMonitorGraphInterval = 60;

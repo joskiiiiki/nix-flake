@@ -8,6 +8,7 @@
   imports = [
     # ../secrets
     ../home/system/dms
+    ../home/programs/vim
     ../home/programs/obsidian
     ../home/programs/affinity
     ../home/system/vicinae
@@ -42,6 +43,7 @@
     ../home/programs/lsp
     ../home/programs/gowall
     # ../home/programs/kakoune
+
   ];
   programs.gh = {
     enable = true;
@@ -49,6 +51,9 @@
   home.packages = with pkgs; [
     # Apps
     # jetbrains.rust-rover
+
+    sage
+
     vesktop # Chat
     vlc # Video player
     blanket # White-noise app
@@ -61,6 +66,12 @@
     obsidian
     vscode
 
+    (texlive.combined.scheme-medium.withPackages (
+      p: with p; [
+        latexmk
+        sagetex
+      ]
+    ))
     # office
     libreoffice-fresh
     hunspell
@@ -98,13 +109,21 @@
 
     appimage-run
     ffmpeg
-    biome
 
     palettify
 
     claude-code
     todoist-electron
 
+    pdftk
+    ghostscript
+
+    typescript
+    typescript-language-server
+    biome
+    tailwindcss-language-server
+
+    vscode-langservers-extracted
   ];
 
   home = {
