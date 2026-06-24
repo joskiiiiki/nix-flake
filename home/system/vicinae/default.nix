@@ -5,19 +5,24 @@
   lib,
   ...
 }:
+let
+  opacity = config.var.theme.system-opacity;
+  rounding = config.var.theme.rounding;
+  blur = config.var.theme.blur;
+in
 {
   imports = [
     inputs.vicinae.homeManagerModules.default
   ];
 
-  xdg.configFile."system.toml".source =
+  xdg.dataFile."vicinae/themes/system.toml".source =
     let
       stylix = config.lib.stylix.colors;
       toml = pkgs.formats.toml { };
       theme = {
         version = 1;
-        name = "Catppuccin Mocha";
-        description = "Cozy feeling with color-rich accents.";
+        name = "System";
+        description = "System";
         variant = "dark";
         inherits = "vicinae-dark";
         colors.core = {
@@ -66,9 +71,9 @@
         name = "stylix";
       };
       window = {
-        opacity = lib.mkForce 1.0;
+        opacity = lib.mkForce (if blur then opacity else 1.0);
         csd = false;
-        rounding = config.var.theme.rounding;
+        rounding = rounding;
       };
     };
 

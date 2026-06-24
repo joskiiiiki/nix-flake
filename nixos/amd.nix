@@ -2,6 +2,8 @@
 {
   # For 24.11
   hardware.graphics.extraPackages = with pkgs; [
+    mesa
+
     rocmPackages.clr.icd
     mesa.opencl
   ];

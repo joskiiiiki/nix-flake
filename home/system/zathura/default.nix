@@ -4,6 +4,9 @@
     enable = true;
 
     options = {
+
+      synctex = true;
+      synctex-edit-command = "nvim --headless -c \"VimtexInverseSearch %{line} '%{input}'\"";
       guioptions = "v";
       adjust-open = "width";
       statusbar-basename = true;

@@ -351,10 +351,11 @@
   home.packages = with pkgs; [
     # Formatters
     biome
-    nodePackages.prettier
+    prettier
+    
 
     # Language servers
-    nodePackages.typescript-language-server
+    typescript-language-server
     tailwindcss-language-server
 
     # Fonts

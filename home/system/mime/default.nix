@@ -27,7 +27,7 @@
       "x-scheme-handler/http" = "zen.desktop";
       "x-scheme-handler/https" = "zen.desktop";
       "text/html" = "zen.desktop";
-      "application/pdf" = "evince.desktop";
+      "application/pdf" = "org.gnome.Evince.desktop";
     };
   };
 }

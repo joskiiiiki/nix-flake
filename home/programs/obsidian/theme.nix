@@ -1,13 +1,28 @@
-
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with config.lib.stylix.colors.withHashtag;
 let
-accent = green;
-accent-secondary = cyan;
+  accent = red;
+  accent-secondary = orange;
+  bg = "#${lib.colors.darkenHex base01 (10.0 / 31.0)}";
+  bg-secondary = "${base00}";
+  installObsidianTheme = pkgs.writeScriptBin "install-obsidian-theme" ''
+    #!${pkgs.nushell}/bin/nu
+    let vault_path = (obsidian vault | lines | each { split column "\t" key value } | flatten | transpose -r -d | get path)
+    let snippets_dir = $"($vault_path)/.obsidian/snippets"
+    mkdir $snippets_dir
+    cp $"($env.HOME)/.obsidian-theme.css" $"($snippets_dir)/stylix-theme.css"
+  '';
 in
 
 {
+
+  home.packages = [ installObsidianTheme ];
   home.file.obsidian-stylix-css = {
     enable = true;
     # THIS VALUE NEEDS TO CHANGE TO YOUR VAULT (relative to your home dir)
@@ -31,7 +46,7 @@ in
            --text-normal: ${base05};
            --text-muted: ${base04};
            --text-selection: ${blue};
-           --text-highlight-bg: ${base00};
+           --text-highlight-bg: ${bg};
         }
 
         .workspace.is-left-sidedock-open .workspace-ribbon.side-dock-ribbon.mod-left::before {
@@ -106,14 +121,14 @@ in
 
 
         .theme-dark {
-          --background-primary: ${base00};
-          --background-secondary: ${base01};
+          --background-primary: ${bg};
+          --background-secondary: ${bg-secondary};
 
-          --background-modifier-cover: ${base00}CC; /*Obsidian Title Bar Bg*/
-          --background-primary: ${base00}; /*Note background*/
-          --background-primary-alt: ${base01}; /*Note Title background active*/
-          --background-secondary: ${base01}; /*Sidebar background*/
-          --background-secondary-alt: ${base00}; /*Sidebar Title background*/
+          --background-modifier-cover: ${bg}CC; /*Obsidian Title Bar Bg*/
+          --background-primary: ${bg}; /*Note background*/
+          --background-primary-alt: ${bg-secondary}; /*Note Title background active*/
+          --background-secondary: ${bg-secondary}; /*Sidebar background*/
+          --background-secondary-alt: ${bg}; /*Sidebar Title background*/
           
           --background-modifier-border: ${base04}55; /*Border outline of quotes, tables, line breaks*/
           
@@ -127,12 +142,12 @@ in
           --text-highlight-bg-active: ${accent-secondary}66; /*Active Search Match (Preview Mode)*/
           --text-selection: ${base0D}44; /*Text Selections*/
 
-          --interactive-normal: ${base01}; /*Button Color*/
-          --interactive-hover: ${base00}; /*Button Hovered Color*/
+          --interactive-normal: ${bg-secondary}; /*Button Color*/
+          --interactive-hover: ${bg}; /*Button Hovered Color*/
           --interactive-accent: ${accent}; /*Workspace Note Title Underline*/
           --interactive-accent-hover: ${accent-secondary}; /*Menu Button Hover*/
           
-          --scrollbar-bg: ${base00}0D; /*Scrollbar Gutter Background*/
+          --scrollbar-bg: ${bg}0D; /*Scrollbar Gutter Background*/
           --scrollbar-thumb-bg: ${base05}0D; /*Scrollbar Color*/
           --scrollbar-active-thumb-bg: ${base05}0D; /*Scrollbar Color*/
 

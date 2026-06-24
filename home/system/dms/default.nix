@@ -5,65 +5,11 @@
   ...
 }:
 let
-  hexToRgb = hex: {
-    r = lib.fromHexString (builtins.substring 0 2 hex);
-    g = lib.fromHexString (builtins.substring 2 2 hex);
-    b = lib.fromHexString (builtins.substring 4 2 hex);
-  };
-  darkenRgb =
-    f:
-    {
-      r,
-      g,
-      b,
-    }:
-    {
-      r = builtins.floor (r * f);
-      b = builtins.floor (b * f);
-      g = builtins.floor (g * f);
-    };
-  mixRgb =
-    f: c1: c2:
-    let
-      mixComponent =
-        f: a: b:
-        builtins.floor ((1 - f) * a + (f * b));
-    in
-    {
-      r = mixComponent f c1.r c2.r;
-      b = mixComponent f c1.b c2.b;
-      g = mixComponent f c1.g c2.g;
-    };
+  blur = config.var.theme.blur;
 
-  pad =
-    l: s:
-    let
-      padLen = lib.max 0 (l - (lib.stringLength s));
-      padStr = lib.concatStrings (lib.replicate padLen "0");
-    in
-    padStr + s;
-
-  rgbToHex =
-    hex:
-    let
-      s = lib.mapAttrs (k: v: pad 2 (lib.toLower (lib.toHexString v))) hex;
-    in
-    "${s.r}${s.g}${s.b}";
-  darkenHex =
-    hex: f:
-    lib.pipe hex [
-      hexToRgb
-      (darkenRgb f)
-      rgbToHex
-    ];
-  mixHex =
-    f: hex1: hex2:
-    let
-      c1 = hexToRgb hex1;
-      c2 = hexToRgb hex2;
-      res = mixRgb f c1 c2;
-    in
-    rgbToHex res;
+  transparency = if blur then config.var.theme.system-opacity else 1.0;
+  border-size = config.var.theme.border-size;
+  rounding = config.var.theme.rounding;
 
 in
 {
@@ -80,13 +26,16 @@ in
 
     settings = {
 
+      animationSpeed = 0;
+      popoutAnimationSpeed = 0;
+      modalAnimationSpeed = 0;
+
       acLockTimeout = 0;
       acMonitorTimeout = 0;
       acProfileName = "";
       acSuspendBehavior = 0;
       acSuspendTimeout = 0;
       activeDisplayProfile = { };
-      animationSpeed = 1;
       appDrawerSectionViewModes = { };
       appIdSubstitutions = [
         {
@@ -115,7 +64,7 @@ in
           type = "regex";
         }
       ];
-      appLauncherGridColumns = 4;
+      appLauncherGridColumns = 5; # was 4
       appLauncherViewMode = "list";
       appPickerViewMode = "grid";
       appsDockActiveColorMode = "primary";
@@ -127,39 +76,48 @@ in
       audioInputDevicePins = { };
       audioOutputDevicePins = { };
       audioScrollMode = "volume";
-      audioVisualizerEnabled = true;
+      audioVisualizerEnabled = false; # was true
       audioWheelScrollAmount = 5;
       barConfigs = [
         {
           autoHide = false;
           autoHideDelay = 250;
           borderColor = "surfaceText";
-          borderEnabled = false;
-          borderOpacity = 1;
-          borderThickness = 1;
+          borderEnabled = true; # was false
+          borderOpacity = 0.2; # was 1
+          borderThickness = border-size;
           bottomGap = 0;
           centerWidgets = [
             "music"
             "clock"
             "weather"
           ];
+          clickThrough = false;
           enabled = true;
           fontScale = 1;
           gothCornerRadiusOverride = true;
-          gothCornerRadiusValue = 20;
+          gothCornerRadiusValue = rounding + config.var.theme.gaps-in * 2;
           gothCornersEnabled = true;
+          iconScale = 1;
           id = "default";
           innerPadding = 4;
           leftWidgets = [
             "workspaceSwitcher"
             "focusedWindow"
+            {
+              id = "dankPomodoroTimer";
+              enabled = true;
+            }
           ];
+          maximizeWidgetIcons = false;
+          maximizeWidgetText = false;
           name = "Main Bar";
           noBackground = false;
-          openOnOverview = false;
+          openOnOverview = true; # was false
           popupGapsAuto = true;
           popupGapsManual = 4;
-          position = 1;
+          position = 2; # was 1 (bottom->top)
+          removeWidgetPadding = false;
           rightWidgets = [
             "systemTray"
             "clipboard"
@@ -178,10 +136,15 @@ in
           showOnLastDisplay = true;
           spacing = 0;
           squareCorners = true;
-          transparency = 1;
           visible = true;
-          widgetOutlineEnabled = false;
-          widgetTransparency = 1;
+          widgetOutlineColor = "surfaceText";
+          widgetOutlineEnabled = true; # was false
+          widgetOutlineOpacity = 0.1;
+          widgetOutlineThickness = border-size;
+          widgetPadding = 10;
+          widgetTransparency = 0.52; # was 1
+
+          transparency = transparency;
         }
       ];
       barMaxVisibleApps = 0;
@@ -202,9 +165,10 @@ in
       builtInPluginSettings = { };
       buttonColorMode = "primary";
       centeringMode = "index";
+      clipboardEnterToPaste = false; # new
       clockCompactMode = false;
       clockDateFormat = "";
-      configVersion = 5;
+      configVersion = 6; # was 5
       controlCenterShowAudioIcon = true;
       controlCenterShowAudioPercent = false;
       controlCenterShowBatteryIcon = false;
@@ -260,7 +224,7 @@ in
           width = 50;
         }
       ];
-      cornerRadius = 12;
+      cornerRadius = rounding;
       currentThemeCategory = "custom";
       currentThemeName = "custom";
       cursorSettings = {
@@ -287,11 +251,12 @@ in
       customPowerActionReboot = "";
       customPowerActionSuspend = "";
       customThemeFile = lib.mkForce "/home/johannes/.config/dms/system.json";
-      dankLauncherV2BorderColor = "primary";
+      dankLauncherV2BorderColor = "surfaceText"; # was "primary"
       dankLauncherV2BorderEnabled = false;
-      dankLauncherV2BorderThickness = 2;
+      dankLauncherV2BorderThickness = border-size; # was 2
       dankLauncherV2ShowFooter = true;
       dankLauncherV2Size = "compact";
+      dankLauncherV2UnloadOnClose = false; # new
       desktopClockColorMode = "primary";
       desktopClockCustomColor = {
         a = 1;
@@ -330,30 +295,30 @@ in
       displaySnapToEdge = true;
       dockAutoHide = false;
       dockBorderColor = "surfaceText";
-      dockBorderEnabled = false;
-      dockBorderOpacity = 1;
-      dockBorderThickness = 1;
+      dockBorderEnabled = true; # was false
+      dockBorderOpacity = 0.15; # was 1
+      dockBorderThickness = border-size;
       dockBottomGap = 0;
       dockGroupByApp = false;
       dockIconSize = 40;
-      dockIndicatorStyle = "circle";
+      dockIndicatorStyle = "line"; # was "circle"
       dockIsolateDisplays = false;
-      dockLauncherEnabled = false;
+      dockLauncherEnabled = true; # was false
       dockLauncherLogoBrightness = 0.5;
       dockLauncherLogoColorOverride = "";
       dockLauncherLogoContrast = 1;
       dockLauncherLogoCustomPath = "";
-      dockLauncherLogoMode = "apps";
+      dockLauncherLogoMode = "compositor"; # was "apps"
       dockLauncherLogoSizeOffset = 0;
-      dockMargin = 0;
+      dockMargin = 5; # was 0
       dockMaxVisibleApps = 0;
       dockMaxVisibleRunningApps = 0;
-      dockOpenOnOverview = false;
-      dockPosition = 1;
+      dockOpenOnOverview = true; # was false
+      dockPosition = 3; # was 1
       dockShowOverflowBadge = true;
-      dockSmartAutoHide = false;
-      dockSpacing = 4;
-      dockTransparency = lib.mkForce 1;
+      dockSmartAutoHide = true; # was false
+      dockSpacing = 10; # was 4
+      dockTransparency = lib.mkForce transparency;
       dwlShowAllTags = false;
       enableFprint = true;
       enableRippleEffects = true;
@@ -430,7 +395,6 @@ in
       maxFprintTries = 15;
       maxWorkspaceIcons = 3;
       mediaSize = 1;
-      modalAnimationSpeed = 1;
       modalCustomAnimationDuration = 150;
       modalDarkenBackground = true;
       monoFontFamily = "JetBrains Mono Nerd Font";
@@ -468,13 +432,12 @@ in
       osdMediaPlaybackEnabled = true;
       osdMediaVolumeEnabled = true;
       osdMicMuteEnabled = true;
-      osdPosition = 5;
+      osdPosition = 0; # was 5
       osdPowerProfileEnabled = false;
       osdVolumeEnabled = true;
       padHours12Hour = false;
-      popoutAnimationSpeed = 1;
       popoutCustomAnimationDuration = 150;
-      popupTransparency = 1;
+      popupTransparency = transparency;
       powerActionConfirm = true;
       powerActionHoldDuration = 0.5;
       powerMenuActions = [
@@ -554,6 +517,14 @@ in
       systemMonitorDisplayPreferences = [
         "all"
       ];
+
+      blurEnabled = blur;
+      blurForegroundLayers = true;
+      blurLayerOutlineOpacity = 0.12;
+      blurBorderColor = "outline";
+      blurBorderCustomColor = "#ffffff";
+      blurBorderOpacity = 0.5;
+
       systemMonitorEnabled = false;
       systemMonitorGpuPciId = "";
       systemMonitorGraphInterval = 60;
@@ -587,9 +558,9 @@ in
       useFahrenheit = false;
       useSystemSoundTheme = false;
       wallpaperFillMode = "Fill";
-      waveProgressEnabled = true;
+      waveProgressEnabled = false; # was true
       weatherEnabled = true;
-      widgetBackgroundColor = "sch";
+      widgetBackgroundColor = "sth"; # was "sch"
       widgetColorMode = "default";
       wifiNetworkPins = { };
       windSpeedUnit = "kmh";
@@ -608,20 +579,19 @@ in
     };
 
     # Core features
-    systemd.enable = false; # Systemd service for auto-start
-    enableSystemMonitoring = true; # System monitoring widgets (dgop)
-    enableVPN = false; # VPN management widget
-    enableDynamicTheming = false; # Wallpaper-based theming (matugen)
-    enableAudioWavelength = false; # Audio visualizer (cava)
-    enableCalendarEvents = true; # Calendar integration (khal)
-    # enableSystemSound = true; # System sound effects
+    systemd.enable = false;
+    enableSystemMonitoring = true;
+    enableVPN = false;
+    enableDynamicTheming = false;
+    enableAudioWavelength = false;
+    enableCalendarEvents = true;
 
   };
 
   xdg.configFile."dms/system.json".text =
     let
       stylix = config.lib.stylix.colors;
-      primary = stylix.base0B;
+      primary = stylix.base0E;
       background = stylix.base00;
       surface = stylix.base01;
       foreground = stylix.base07;
@@ -629,7 +599,7 @@ in
       colors = builtins.mapAttrs (k: v: "#${v}") {
         inherit primary background surface;
         primaryText = background;
-        primaryContainer = mixHex 0.8 background primary;
+        primaryContainer = "#${lib.colors.mixHex 0.8 background primary}";
         backgroundText = foreground;
         surfaceContainer = stylix.base00;
         surfaceContainerHigh = stylix.base01;
