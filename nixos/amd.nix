@@ -2,7 +2,6 @@
 {
   # For 24.11
   hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
     mesa
 
     rocmPackages.clr.icd
