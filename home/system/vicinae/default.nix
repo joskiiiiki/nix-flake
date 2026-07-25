@@ -30,7 +30,7 @@ in
           foreground = "#${stylix.base05}";
           secondary_background = "#${stylix.base01}";
           border = "#${stylix.base03}";
-          accent = "#${stylix.base0D}";
+          accent = "#${stylix.base0A}";
         };
         colors.accents = {
           blue = "#${stylix.base0D}";
@@ -47,7 +47,7 @@ in
     toml.generate "system.toml" theme;
 
   home.packages = with pkgs; [ vicinae ];
-  services.vicinae = {
+  programs.vicinae = {
     enable = true; # default: false
     package = pkgs.vicinae;
     settings = {

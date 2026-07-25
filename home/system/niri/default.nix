@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  accent     = "#${config.lib.stylix.colors.base0E}";
+  accent     = "#${config.lib.stylix.colors.base0A}";
   background = "#${config.lib.stylix.colors.base00}";
   border     = "#${config.lib.stylix.colors.base04}";
   border-size = toString config.var.theme.border-size;
@@ -96,6 +96,7 @@ in
         "QT_QPA_PLATFORMTHEME" "gtk3"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION" "1"
         "SDL_VIDEODRIVER" "wayland"
+        "CLAUDE_USE_WAYLAND" "1"
         TERM "kitty"
         TERMINAL "kitty"
         "WLR_BACKEND" "vulkan"
@@ -108,12 +109,18 @@ in
         "__GL_GSYNC_ALLOWED" "0"
         "__GL_VRR_ALLOWED" "0"
     }
-    spawn-at-startup "${pkgs.vicinae}/bin/vicinae" "server"
-    spawn-at-startup "dms" "run" "-d"
+    spawn-at-startup "noctalia"
     window-rule {
         draw-border-with-background false
         geometry-corner-radius ${rounding} ${rounding} ${rounding} ${rounding}
         clip-to-geometry true
+    }
+    layer-rule {
+      match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+      background-effect {
+        xray false
+        // blur false
+      }
     }
     layer-rule {
         match namespace="quickshell"
@@ -121,63 +128,20 @@ in
         place-within-backdrop true
     }
 
+    layer-rule {
+      match namespace="^noctalia-wallpaper"
+      place-within-backdrop true
+    }
     blur {
         ${blur}
         passes 2
-        offset 7
+        offset 2
         noise 0.03  
         saturation 1.5
     }
-    // Block out sensitive components from screencasts
-    layer-rule {
-        match namespace="^dms:clipboard$"
-
-        block-out-from "screencast"
-    }
-
-    // Match all DMS layers with a regex
-    layer-rule {
-        match namespace=r#"^dms:.*"#
-        background-effect {
-            xray false
-        }
-
-    }
-    layer-rule {
-        match namespace=r#"^vicinae$"#
-        background-effect {
-            xray false
-        }
-
-    }
-        // Apply rules to all DMS components
-
-    window-rule {
-        match app-id="^zen-beta$"
-        draw-border-with-background false
-        clip-to-geometry true
-        geometry-corner-radius 12
-
-        background-effect {
-            blur true
-        }
-    }
-
-    window-rule {
-        match app-id="^org.gnome.Nautilus$"
-        opacity 0.8
-
-        background-effect {
-            blur true
-        }
-    }
-    window-rule {
-        match app-id="^org.gnome.Nautilus$"
-        opacity 0.8
-
-        background-effect {
-            blur true
-        }
+    debug {
+      // Allows notification actions and window activation from Noctalia.
+      honor-xdg-activation-with-invalid-serial
     }
   '';
 }

@@ -12,7 +12,7 @@ let
     {
       pl ? "",
     }:
-    "${pkgs.vicinae}/bin/vicinae dmenu -p \"${pl}\"";
+    "noctalia dmenu -p \"${pl}\"";
   mirror =
     pkgs.writeScriptBin "screen-mirror" # nu
       ''
@@ -26,14 +26,6 @@ let
 
         ${pkgs.wl-mirror}/bin/wl-mirror --fullscreen-output $target $focused
       '';
-  menu = pkgs.writeScriptBin "menu" ''
-    #!/usr/bin/env nu
-    if (pidof dms | is-not-empty ) {
-      dms ipc call spotlight open
-    } else {
-      vicinae open
-    }        
-  '';
 
   powermenu = pkgs.writeScriptBin "powermenu" /* nu */ ''
     #!/usr/bin/env nu
@@ -72,8 +64,6 @@ let
   quickmenu = pkgs.writeScriptBin "quickmenu" /* nu */ ''
       #!/usr/bin/env nu
       let opts = {
-          "󰅶  Caffeine": {|| caffeine}
-          "󰖔  Night-shift": {|| night-shift}
           "󰈊  Hyprpicker": {|| sleep 200ms;  ${pkgs.hyprpicker}/bin/hyprpicker -a}
           "󱜤  Screen Mirror": {|| screen-mirror}
           "󰚥  Power Mode": {|| powermode}
@@ -86,7 +76,6 @@ let
 in
 {
   home.packages = [
-    menu
     powermenu
     quickmenu
     mirror

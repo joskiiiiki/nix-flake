@@ -19,15 +19,30 @@
       "text/x-dockerfile" = "helix.desktop";
       "text/x-xml" = "helix.desktop";
       "text/x-php" = "helix.desktop";
-      "image/png" = "loupe.desktop";
-      "image/jpeg" = "loupe.desktop";
-      "image/jpg" = "loupe.desktop";
-      "image/webp" = "loupe.desktop";
-      "image/gif" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "text/html" = "zen.desktop";
-      "application/pdf" = "org.gnome.Evince.desktop";
+      "image/png" = "org.gnome.Loupe.desktop";
+      "image/jpeg" = "org.gnome.Loupe.desktop";
+      "image/jpg" = "org.gnome.Loupe.desktop";
+      "image/webp" = "org.gnome.Loupe.desktop";
+      "image/gif" = "vivaldi-stable.desktop";
+      "x-scheme-handler/http" = "vivaldi-stable.desktop";
+      "x-scheme-handler/https" = "vivaldi-stable.desktop";
+      "text/html" = "vivaldi-stable.desktop";
+      "application/pdf" = "org.gnome.Papers.desktop";
+
+      # Word
+      "application/msword" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.text" = "onlyoffice-desktopeditors.desktop";
+
+      # PowerPoint
+      "application/vnd.ms-powerpoint" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "onlyoffice-desktopeditors.desktop";
+
+      # Excel
+      "application/vnd.ms-excel" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "onlyoffice-desktopeditors.desktop";
     };
   };
 }

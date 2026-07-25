@@ -17,5 +17,8 @@
     svelte-language-server
     zls
     biome
+
+    ty
+    ruff
   ];
 }

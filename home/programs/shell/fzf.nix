@@ -1,7 +1,7 @@
 # Fzf is a general-purpose command-line fuzzy finder.
 { config, lib, ... }:
 let
-  accent = "#" + config.lib.stylix.colors.base0D;
+  accent = "#" + config.lib.stylix.colors.base0A;
   foreground = "#" + config.lib.stylix.colors.base05;
   muted = "#" + config.lib.stylix.colors.base03;
 in

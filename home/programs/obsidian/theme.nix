@@ -7,7 +7,7 @@
 
 with config.lib.stylix.colors.withHashtag;
 let
-  accent = red;
+  accent = blue;
   accent-secondary = orange;
   bg = "#${lib.colors.darkenHex base01 (10.0 / 31.0)}";
   bg-secondary = "${base00}";

@@ -20,11 +20,11 @@
         Mod+Next { focus-window-or-workspace-down; }
         Mod+Prior { focus-window-or-workspace-up; }
         Mod+Q { spawn "${pkgs.kitty}/bin/kitty" "-1"; }
-        Mod+R cooldown-ms=500 { spawn "menu"; }
+        Mod+R cooldown-ms=500 { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
         Mod+Right { consume-or-expel-window-right; }
         Mod+S { focus-window-or-workspace-down; }
         Mod+Shift+A { move-column-left-or-to-monitor-left; }
-        Mod+Shift+C { spawn "${pkgs.vicinae}/bin/vicinae" "vicinae://extensions/vicinae/clipboard/history"; }
+        Mod+Shift+C { spawn "noctalia" "msg" "panel-open" "clipboard"; }
         Mod+Shift+D { move-column-right-or-to-monitor-right; }
         Mod+Shift+F { fullscreen-window; }
         Mod+Shift+Next { move-window-down-or-to-workspace-down; }

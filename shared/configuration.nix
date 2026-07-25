@@ -7,15 +7,13 @@
   ];
   xdg.terminal-exec.settings.default = [ "kitty.desktop" ];
   imports = [
-    # ../home/system/gnome/system.nix
     ../home/system/niri/system.nix
-    ../home/programs/julia
-    # ../home/system/mango/system.nix
+    ../home/system/noctalia/system.nix
     ../nixos/printing.nix
     ../nixos/docker.nix
-    # ../home/programs/flatpak/system.nix
   ];
   stylix.targets.plymouth.enable = true;
+
   services.gvfs.enable = true;
 
   boot.kernelModules = [

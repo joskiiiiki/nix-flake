@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, inputs, ... }: {
 
   programs.niri = {
     enable = true;
@@ -15,7 +15,6 @@
       cage
       gamescope
       xwayland-satellite-unstable
-      swww
       xdg-desktop-portal-gtk
     ];
   };

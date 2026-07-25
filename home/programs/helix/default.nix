@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  toml = pkgs.formats.toml { };
-in
 {
   imports = [
     ./themes/default.nix
@@ -20,8 +17,6 @@ in
     cargo-deny
     cargo-edit
     cargo-watch
-    rust-analyzer
-    rustc
     wgsl-analyzer
   ];
 

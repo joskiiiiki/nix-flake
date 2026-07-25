@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   programs.helix.settings = {
     theme = lib.mkForce "vercel";
 
@@ -86,6 +86,7 @@
       };
 
       normal = {
+        "A-ä" = "switch_to_uppercase";
         "C-space" = "completion";
       };
     };

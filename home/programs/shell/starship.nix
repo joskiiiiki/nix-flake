@@ -1,7 +1,7 @@
 # starship is a minimal, fast, and extremely customizable prompt for any shell!
 { config, lib, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0E}";
+  accent = "#${config.lib.stylix.colors.base0A}";
   background-alt = "#${config.lib.stylix.colors.base01}";
 in
 {
