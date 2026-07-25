@@ -31,7 +31,6 @@
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-<<<<<<< HEAD
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
@@ -39,11 +38,6 @@
     # affinity = {
     #   url = "github:mrshmllow/affinity-nix";
     # };
-=======
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
-    };
->>>>>>> 65560a7afb8123dc50b6abd6a9d670e9af88773f
     palettify = {
       url = "github:joskiiiiki/palettify-rust";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,11 +54,7 @@
         inputs.niri.overlays.niri
         inputs.claude-desktop.overlays.default
         (final: prev: {
-<<<<<<< HEAD
           # affinity = inputs.affinity.packages.${system}.affinity-v3;
-=======
-          zen-browser = inputs.zen-browser.packages.${system}.beta;
->>>>>>> 65560a7afb8123dc50b6abd6a9d670e9af88773f
           palettify = inputs.palettify.packages.${system}.default;
         })
       ];
