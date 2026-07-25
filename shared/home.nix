@@ -11,7 +11,12 @@
     ../home/system/noctalia
     ../home/programs/vim
     ../home/programs/obsidian
+<<<<<<< HEAD
     # ../home/system/vicinae
+=======
+    ../home/system/vicinae
+    # ../home/programs/sherlock
+>>>>>>> 65560a7afb8123dc50b6abd6a9d670e9af88773f
     ../home/programs/direnv
     ../home/programs/btop
     ../home/system/niri

@@ -88,7 +88,12 @@
       normal = {
         "A-ä" = "switch_to_uppercase";
         "C-space" = "completion";
+        space = {
+          i = ":toggle lsp.display-inlay-hints";
+        };
       };
+
+      
     };
   };
 }

@@ -1,11 +1,11 @@
 { pkgs, config, ... }:
 let
-  accent     = "#${config.lib.stylix.colors.base0A}";
+  accent     = "#${config.lib.stylix.colors.base0D}";
   background = "#${config.lib.stylix.colors.base00}";
-  border     = "#${config.lib.stylix.colors.base04}";
+  border = "#${config.lib.stylix.colors.base04}";
   border-size = toString config.var.theme.border-size;
-  gaps-out    = toString config.var.theme.gaps-out;
-  rounding    = toString config.var.theme.rounding;
+  gaps-out = toString config.var.theme.gaps-out;
+  rounding = toString config.var.theme.rounding;
   blur = if config.var.theme.blur then "on" else "off";
 in
 {
@@ -135,8 +135,13 @@ in
     blur {
         ${blur}
         passes 2
+<<<<<<< HEAD
         offset 2
-        noise 0.03  
+        noise 0.03
+=======
+        offset 7
+        noise 0.03
+>>>>>>> 65560a7afb8123dc50b6abd6a9d670e9af88773f
         saturation 1.5
     }
     debug {
