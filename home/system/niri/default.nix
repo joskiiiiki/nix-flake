@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  accent     = "#${config.lib.stylix.colors.base0D}";
+  accent     = "#${config.lib.stylix.colors.base0E}";
   background = "#${config.lib.stylix.colors.base00}";
   border = "#${config.lib.stylix.colors.base04}";
   border-size = toString config.var.theme.border-size;
@@ -10,8 +10,6 @@ let
 in
 {
   imports = [ ./binds.nix ];
-
-  programs.niri.config = null;
 
   xdg.configFile."niri/config.kdl".text = /* kdl */ ''
     include "~/.config/niri/binds.kdl"
@@ -135,13 +133,8 @@ in
     blur {
         ${blur}
         passes 2
-<<<<<<< HEAD
-        offset 2
-        noise 0.03
-=======
         offset 7
         noise 0.03
->>>>>>> 65560a7afb8123dc50b6abd6a9d670e9af88773f
         saturation 1.5
     }
     debug {

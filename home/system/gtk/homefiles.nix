@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0A}";
+  accent = "#${config.lib.stylix.colors.base0D}";
   foreground = "#${config.lib.stylix.colors.base05}";
   background = "#${config.lib.stylix.colors.base00}";
   background-alt = "#${config.lib.stylix.colors.base01}";

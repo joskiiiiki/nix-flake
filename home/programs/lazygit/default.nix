@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0A}";
+  accent = "#${config.lib.stylix.colors.base0D}";
   muted = "#${config.lib.stylix.colors.base03}";
 in
 {

@@ -3,7 +3,7 @@
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   colors = config.lib.stylix.colors;
-  accent = colors.base0A;
+  accent = colors.base0D;
 
 in
 {

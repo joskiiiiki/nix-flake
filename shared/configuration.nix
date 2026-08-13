@@ -13,6 +13,7 @@
     ../nixos/docker.nix
   ];
   stylix.targets.plymouth.enable = true;
+  stylix.targets.plymouth.logo = ../logo.png;
 
   services.gvfs.enable = true;
 

@@ -75,7 +75,6 @@ in
       extraPackages = with pkgs; [
         ripgrep
         fd
-        sage
         zathura
         texlivePackages.latexmk
       ];

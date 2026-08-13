@@ -2,9 +2,8 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
+    package = pkgs.niri;
   };
-  niri-flake.cache.enable = true;
   environment = {
     variables.NIXOS_OZONE_WL = "1";
     sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
@@ -14,7 +13,7 @@
       libsecret
       cage
       gamescope
-      xwayland-satellite-unstable
+      xwayland-satellite
       xdg-desktop-portal-gtk
     ];
   };

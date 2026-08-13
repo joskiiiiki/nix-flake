@@ -10,10 +10,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +47,6 @@
       utils = import ./utils.nix { inherit nixpkgs inputs; };
       lib = nixpkgs.lib.extend (_: _: import ./lib/colors.nix { lib = nixpkgs.lib; });
       overlays = [
-        inputs.niri.overlays.niri
         inputs.claude-desktop.overlays.default
         (final: prev: {
           # affinity = inputs.affinity.packages.${system}.affinity-v3;
@@ -61,7 +56,6 @@
       modules = with inputs; [
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
-        niri.nixosModules.niri
       ];
     in
     {

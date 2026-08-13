@@ -16,11 +16,11 @@
       base08 = "#52a8ff";
       base09 = "#ff9907";
       base0A = "#52a8ff";
-      base0B = "#62c073";
-      base0C = "#1da9b0";
-      base0D = "#c472fb";
-      base0E = "#f75f8f";
-      base0F = "#52a8ff";
+      base0B = "#c472fb";
+      base0C = "#52a8ff";
+      base0D = "#62c073";
+      base0E = "#1da9b0";
+      base0F = "#f75f8f";
     };
 
     cursor = {

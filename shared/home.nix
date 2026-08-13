@@ -40,7 +40,6 @@
 
     pkgs.claude-desktop
 
-    sage
 
     vesktop # Chat
     vlc # Video player
@@ -80,6 +79,8 @@
     pfetch
     pandoc
     overskride
+
+    fresh-editor
 
     # nixshit
     nixpkgs-fmt
