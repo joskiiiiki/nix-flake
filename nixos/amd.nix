@@ -7,6 +7,7 @@
     rocmPackages.clr.icd
     mesa.opencl
   ];
+  nixpkgs.config.rocmSupport = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

@@ -7,6 +7,7 @@
     ../../nixos/bluetooth.nix
     ../../nixos/fonts.nix
     ../../nixos/home-manager.nix
+    ../../nixos/razer.nix
     ../../nixos/network-manager.nix
     ../../nixos/nix.nix
     ../../nixos/systemd-boot.nix

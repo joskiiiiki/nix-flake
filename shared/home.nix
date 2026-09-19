@@ -51,6 +51,7 @@
     vivaldi-ffmpeg-codecs
     ungoogled-chromium
     obsidian
+    zellij
     vscode
 
     kdePackages.filelight
@@ -63,6 +64,7 @@
     ))
     # office
     libreoffice-fresh
+    spotatui
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us-large
