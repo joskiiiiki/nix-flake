@@ -38,12 +38,12 @@
   };
   home.packages = with pkgs; [
 
-    pkgs.claude-desktop
-
+    claude-desktop
 
     vesktop # Chat
     vlc # Video player
     pomodoro-gtk
+    typora
 
     proton-pass
 
@@ -53,6 +53,7 @@
     obsidian
     zellij
     vscode
+    notion-electron
 
     kdePackages.filelight
 
@@ -91,7 +92,6 @@
     nixd
 
     nautilus
-    nautilus
 
     # multimedia
     pavucontrol
@@ -108,6 +108,7 @@
 
     claude-code
     todoist-electron
+    code-cursor
 
     pdftk
     ghostscript

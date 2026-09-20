@@ -12,4 +12,6 @@
     # (This is already the default, but explicit beats implicit.)
     devicesOffOnScreensaver = true;
   };
+  environment.systemPackages = [ pkgs.openrgb ];
+  services.hardware.openrgb.enable = true;
 }

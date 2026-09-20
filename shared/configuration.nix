@@ -22,4 +22,5 @@
     "i2c-algo-bit"
   ];
   hardware.i2c.enable = true;
+  hardware.enableRedistributableFirmware = true;
 }

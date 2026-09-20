@@ -17,6 +17,10 @@
   #   # driSupport = true;
   #   # driSupport32Bit = true;
   # };
+  environment.systemPackages = [
+    pkgs.rocmPackages.amdsmi
+    pkgs.rocmPackages.rocm-smi
+  ];
   systemd.tmpfiles.rules =
     let
       rocmEnv = pkgs.symlinkJoin {
