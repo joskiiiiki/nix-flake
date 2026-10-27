@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.helix.languages = {
     language = [
@@ -117,11 +118,33 @@
       }
       {
         name = "java";
-        language-servers = [ "intellij-server" ];
+        scope = "source.java";
+        injection-regex = "java";
+        file-types = [ "java" ];
+        roots = [
+          "pom.xml"
+          "build.gradle"
+          "build.gradle.kts"
+          "settings.gradle"
+          "settings.gradle.kts"
+          ".git"
+        ];
+        language-servers = [ "jdtls" ];
+        indent = {
+          tab-width = 4;
+          unit = "    ";
+        };
       }
       {
         name = "kotlin";
-        language-servers = [ "intellij-server" ];
+        roots = [
+          "settings.gradle.kts"
+          "settings.gradle"
+          "build.gradle.kts"
+          "build.gradle"
+          ".git"
+        ];
+        language-servers = [ "kotlin-language-server" ];
       }
       {
         name = "caddyfile";
@@ -145,12 +168,16 @@
         command = "wgsl-analyzer";
         args = [ ];
       };
+      # *-direnv wrappers (home/programs/lsp/default.nix) re-run these through
+      # `direnv exec` for the buffer's project dir, so a flake/venv-managed
+      # interpreter (numpy, etc.) is actually visible to the server - plain
+      # `ruff`/`ty` here would otherwise resolve the ambient system Python.
       ruff = {
-        command = "ruff";
+        command = "ruff-direnv";
         args = [ "server" ];
       };
       ty = {
-        command = "ty";
+        command = "ty-direnv";
         args = [ "server" ];
       };
       biome = {
@@ -165,9 +192,41 @@
         command = "caddy-language-server";
         args = [ "--stdio" ];
       };
-      intellij-server = {
-        command = "intellij-server";
-        args = [ ];
+      jdtls = {
+        command = "jdtls-launcher";
+        config = {
+          java = {
+            completion = {
+              enableSnippets = true;
+            };
+            import = {
+              gradle = {
+                enabled = true;
+              };
+              maven = {
+                enabled = true;
+              };
+            };
+            configuration = {
+              updateBuildConfiguration = "automatic";
+              runtimes = [
+                {
+                  name = "JavaSE-21";
+                  path = "${pkgs.jdk.home}";
+                  default = true;
+                }
+              ];
+            };
+            inlayHints = {
+              parameterNames = {
+                enabled = "all";
+              };
+            };
+          };
+        };
+      };
+      kotlin-language-server = {
+        command = "kotlin-language-server";
       };
     };
   };

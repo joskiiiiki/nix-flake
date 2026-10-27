@@ -30,6 +30,7 @@
     ../home/programs/lazygit
     ../home/programs/zed
     ../home/programs/helix
+    ../home/programs/kakoune
     ../home/programs/lsp
 
   ];

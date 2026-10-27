@@ -26,6 +26,7 @@
       "graphql"
       "html"
       "ini"
+      "java"
       "jetbrains-new-ui-icons"
       "latex"
       "lua"
@@ -339,6 +340,59 @@
                 enable = true;
               };
             };
+          };
+        };
+
+        jdtls = {
+          settings = {
+            java_home = "${pkgs.jdk.home}";
+            lombok_support = true;
+          };
+          initialization_options = {
+            settings = {
+              java = {
+                completion = {
+                  enableSnippets = true;
+                };
+                import = {
+                  gradle = {
+                    enabled = true;
+                  };
+                  maven = {
+                    enabled = true;
+                  };
+                };
+                configuration = {
+                  updateBuildConfiguration = "automatic";
+                  runtimes = [
+                    {
+                      name = "JavaSE-21";
+                      path = "${pkgs.jdk.home}";
+                      default = true;
+                    }
+                  ];
+                };
+              };
+            };
+          };
+        };
+
+        # Zed spawns LSP servers with its own inherited environment, not the
+        # project's direnv/flake devShell, so bare ruff/ty resolve the wrong
+        # Python interpreter for direnv-managed projects. These wrappers
+        # (home/programs/lsp/default.nix) re-run the real binary through
+        # `direnv exec` for the server's cwd, falling back to the plain
+        # binary if that fails - see the comment there for details.
+        ruff = {
+          binary = {
+            path = "ruff-direnv";
+            arguments = [ "server" ];
+          };
+        };
+        ty = {
+          binary = {
+            path = "ty-direnv";
+            arguments = [ "server" ];
           };
         };
       };
