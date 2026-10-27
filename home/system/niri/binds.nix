@@ -32,7 +32,7 @@
         Mod+Shift+Q { switch-preset-column-width; }
         Mod+Shift+S { move-window-down-or-to-workspace-down; }
         Mod+Shift+W { move-window-up-or-to-workspace-up; }
-        Mod+Shift+period { set-dynamic-cast-monitor; }
+        Mod+Shift+period { set-dynamic-cast-window; }
         Mod+Tab { toggle-overview; }
         Mod+Up { consume-window-into-column; }
         Mod+V { toggle-window-floating; }

@@ -17,6 +17,9 @@ in
     allowUnfree = true;
     allowBroken = true;
     allowUnfreePredicate = _: true;
+    permittedInsecurePackages = [
+      "firefox-esr-140-bin-unwrapped-140.17.0esr"
+    ];
   };
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

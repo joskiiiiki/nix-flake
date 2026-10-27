@@ -1,9 +1,13 @@
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
+
+    geteduroam
     libfaketime
     ddcutil
     openjdk
+    gradle-completion
+    gradle
   ];
   xdg.terminal-exec.settings.default = [ "kitty.desktop" ];
   imports = [

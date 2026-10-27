@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 let
   accent     = "#${config.lib.stylix.colors.base0E}";
+  screencast     = "#${config.lib.stylix.colors.base0F}";
   background = "#${config.lib.stylix.colors.base00}";
   border = "#${config.lib.stylix.colors.base04}";
   border-size = toString config.var.theme.border-size;
@@ -141,5 +142,28 @@ in
       // Allows notification actions and window activation from Noctalia.
       honor-xdg-activation-with-invalid-serial
     }
+
+    // Indicate screencasted windows with red colors.
+    window-rule {
+        match is-window-cast-target=true
+
+        focus-ring {
+            active-color "#f38ba8"
+            inactive-color "#7d0d2d"
+        }
+
+        border {
+            inactive-color "#7d0d2d"
+        }
+
+        shadow {
+            color "#7d0d2d70"
+        }
+
+        tab-indicator {
+            active-color "#f38ba8"
+            inactive-color "#7d0d2d"
+        }
+    }        
   '';
 }

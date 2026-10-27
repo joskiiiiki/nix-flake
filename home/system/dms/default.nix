@@ -375,7 +375,6 @@ in
       matugenTemplateDgop = true;
       matugenTemplateEmacs = true;
       matugenTemplateEquibop = true;
-      matugenTemplateFirefox = true;
       matugenTemplateFoot = true;
       matugenTemplateGhostty = true;
       matugenTemplateGtk = true;

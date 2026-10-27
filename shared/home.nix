@@ -54,17 +54,14 @@
     zellij
     vscode
     notion-electron
+    intellij-idea
+    anki
 
     kdePackages.filelight
 
-    (texlive.combined.scheme-medium.withPackages (
-      p: with p; [
-        latexmk
-        sagetex
-      ]
-    ))
+    texliveMedium
     # office
-    libreoffice-fresh
+    libreoffice-stable
     spotatui
     hunspell
     hunspellDicts.de-de

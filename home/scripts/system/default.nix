@@ -13,7 +13,13 @@ let
       pl ? "",
     }:
     "noctalia dmenu -p \"${pl}\"";
+
+  dyntarget = pkgs.writeShellScriptBin # bash
+    ''
+      niri msg action set-dynamic-cast-window --id $(niri msg --json pick-window | jq .id)      
+    '';
   mirror =
+
     pkgs.writeScriptBin "screen-mirror" # nu
       ''
         #!/usr/bin/env nu
@@ -65,6 +71,7 @@ let
       #!/usr/bin/env nu
       let opts = {
           "󰈊  Hyprpicker": {|| sleep 200ms;  ${pkgs.hyprpicker}/bin/hyprpicker -a}
+          "󰈊  Dynamic Cast Target": {|| sleep 200ms; pick-dyn-target}
           "󱜤  Screen Mirror": {|| screen-mirror}
           "󰚥  Power Mode": {|| powermode}
       }
@@ -76,6 +83,7 @@ let
 in
 {
   home.packages = [
+    # dyntarget
     powermenu
     quickmenu
     mirror

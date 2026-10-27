@@ -116,6 +116,14 @@
         };
       }
       {
+        name = "java";
+        language-servers = [ "intellij-server" ];
+      }
+      {
+        name = "kotlin";
+        language-servers = [ "intellij-server" ];
+      }
+      {
         name = "caddyfile";
         language-servers = [ "caddy-lsp" ];
         auto-format = true;
@@ -156,6 +164,10 @@
       caddy-lsp = {
         command = "caddy-language-server";
         args = [ "--stdio" ];
+      };
+      intellij-server = {
+        command = "intellij-server";
+        args = [ ];
       };
     };
   };

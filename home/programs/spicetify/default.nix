@@ -41,7 +41,7 @@ in
         fullAppDisplay
         fullAlbumDate
         shuffle
-        betterGenres
+        # betterGenres
       ];
   };
 }

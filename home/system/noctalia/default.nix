@@ -9,6 +9,12 @@
     enable = true;
 
     settings = {
+      idle.behavior.lock = {
+        action = "lock";
+        enabled = false; # Schaltet das automatische Sperren ab
+      };
+
+      lockscreen.lock_before_suspend = false;
       bar = {
         default = {
           auto_hide = false;
